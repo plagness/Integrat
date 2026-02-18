@@ -1,0 +1,17 @@
+{
+  "name": "@integrat/sdk",
+  "version": "2026.2.1",
+  "description": "SDK для платформы обмена данными Integrat",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plagness/Integrat.git",
+    "directory": "sdk/nodejs"
+  },
+  "keywords": ["integrat", "telegram", "data-exchange", "mcp"],
+  "engines": {
+    "node": ">=18"
+  }
+}
