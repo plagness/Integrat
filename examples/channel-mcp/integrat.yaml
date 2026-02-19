@@ -7,7 +7,6 @@ plugin:
   description: Аналитика Telegram-каналов — сообщения, теги, семантический поиск
   version: 2026.02.9
   homepage: https://github.com/plagness/Channel-MCP
-  icon: null
 
 provider:
   base_url: ${CHANNEL_MCP_URL}
@@ -123,7 +122,6 @@ config_fields:
     help: >
       JSON-массив каналов. Каждый объект: username (обязательно),
       title, category, is_private (boolean).
-      Пример: [{"username":"durov","title":"Канал Дурова","category":"tech"}]
 
   - slug: backfill_days
     label: Глубина загрузки (дней)
