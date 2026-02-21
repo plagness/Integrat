@@ -1,6 +1,6 @@
 # Integrat
 
-[![Version](https://img.shields.io/badge/version-2026.02.1-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-2026.02.2-blue.svg)](VERSION)
 [![Go](https://img.shields.io/badge/sdk-go%201.22+-00ADD8.svg)](sdk/go/)
 [![Node.js](https://img.shields.io/badge/sdk-node%2018+-339933.svg)](sdk/nodejs/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
