@@ -1,0 +1,192 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/plagness/Integrat/main/spec/integrat.schema.json",
+  "title": "integrat.yaml",
+  "description": "Спецификация плагина Integrat — описание данных, эндпоинтов и конфигурации",
+  "type": "object",
+  "required": ["plugin", "provider", "endpoints"],
+  "additionalProperties": false,
+  "properties": {
+    "plugin": {
+      "type": "object",
+      "description": "Метаинформация о плагине",
+      "required": ["slug", "name", "description", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "description": "Уникальный идентификатор (a-z, 0-9, точка, дефис, подчёркивание)"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Отображаемое название плагина"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Краткое описание"
+        },
+        "version": {
+          "type": "string",
+          "description": "Версия плагина (CalVer или SemVer)"
+        },
+        "homepage": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL домашней страницы / GitHub"
+        },
+        "icon": {
+          "type": "string",
+          "description": "URL или emoji иконки"
+        }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "description": "Настройки подключения к провайдеру данных",
+      "required": ["base_url"],
+      "additionalProperties": false,
+      "properties": {
+        "base_url": {
+          "type": "string",
+          "description": "Базовый URL API провайдера (поддерживает ${ENV_VAR})"
+        },
+        "health_path": {
+          "type": "string",
+          "default": "/health",
+          "description": "Путь для health check (по умолчанию /health)"
+        },
+        "auth": {
+          "type": "object",
+          "description": "Аутентификация при запросах к провайдеру",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["bearer", "header", "none"],
+              "description": "Тип авторизации"
+            },
+            "env": {
+              "type": "string",
+              "description": "Переменная окружения с токеном"
+            },
+            "header": {
+              "type": "string",
+              "description": "Имя заголовка (для type: header)"
+            }
+          }
+        }
+      }
+    },
+    "endpoints": {
+      "type": "array",
+      "description": "Список эндпоинтов плагина",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["slug", "name", "path", "access"],
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]*$",
+            "description": "Идентификатор эндпоинта (например messages.fetch)"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Отображаемое название"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание эндпоинта"
+          },
+          "path": {
+            "type": "string",
+            "description": "Путь на сервере провайдера"
+          },
+          "method": {
+            "type": "string",
+            "enum": ["GET", "POST", "PUT", "DELETE"],
+            "default": "POST",
+            "description": "HTTP-метод (по умолчанию POST)"
+          },
+          "access": {
+            "type": "string",
+            "enum": ["open", "gated", "private"],
+            "description": "Уровень доступа: open (все), gated (по запросу), private (только owner)"
+          },
+          "cache_ttl": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Время жизни кеша в секундах (0 = без кеша)"
+          },
+          "data_type": {
+            "type": "string",
+            "enum": ["basic", "medium", "complex"],
+            "description": "Тип данных для ценообразования"
+          },
+          "params_schema": {
+            "type": "object",
+            "description": "JSON Schema параметров запроса"
+          }
+        }
+      }
+    },
+    "config_fields": {
+      "type": "array",
+      "description": "Поля конфигурации (генерируют форму в Mini App)",
+      "items": {
+        "type": "object",
+        "required": ["slug", "label", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Ключ конфигурации"
+          },
+          "label": {
+            "type": "string",
+            "description": "Отображаемая метка"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["string", "number", "boolean", "select"],
+            "description": "Тип поля ввода"
+          },
+          "required": {
+            "type": "boolean",
+            "default": false,
+            "description": "Обязательное поле"
+          },
+          "default": {
+            "description": "Значение по умолчанию"
+          },
+          "placeholder": {
+            "type": "string",
+            "description": "Подсказка в поле ввода"
+          },
+          "help": {
+            "type": "string",
+            "description": "Подсказка под полем"
+          },
+          "options": {
+            "type": "array",
+            "description": "Варианты для type: select",
+            "items": {
+              "type": "object",
+              "required": ["value", "label"],
+              "additionalProperties": false,
+              "properties": {
+                "value": { "type": "string" },
+                "label": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

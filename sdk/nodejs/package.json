@@ -1,6 +1,6 @@
 {
   "name": "@integrat/sdk",
-  "version": "2026.2.1",
+  "version": "2026.2.2",
   "description": "SDK для платформы обмена данными Integrat",
   "main": "index.js",
   "types": "index.d.ts",
