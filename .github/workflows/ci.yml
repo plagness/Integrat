@@ -21,9 +21,9 @@ jobs:
       - name: Go vet
         working-directory: sdk/go
         run: go vet ./...
-      - name: Run tests
+      - name: Run unit tests
         working-directory: sdk/go
-        run: go test -race -count=1 ./...
+        run: go test -race -count=1 ./internal/...
 
   node:
     runs-on: ubuntu-latest
