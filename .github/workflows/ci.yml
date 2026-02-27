@@ -18,6 +18,12 @@ jobs:
       - name: Build Go SDK
         working-directory: sdk/go
         run: go build ./...
+      - name: Go vet
+        working-directory: sdk/go
+        run: go vet ./...
+      - name: Run tests
+        working-directory: sdk/go
+        run: go test -race -count=1 ./...
 
   node:
     runs-on: ubuntu-latest
