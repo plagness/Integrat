@@ -1,0 +1,12 @@
+category: tools
+type: personal
+status: active
+title:
+  en: "Integrat"
+  ru: "Integrat"
+description:
+  en: "Service integration framework in Go"
+  ru: "Фреймворк интеграции сервисов на Go"
+tags: [go, integration, api]
+focus:
+  - backend
